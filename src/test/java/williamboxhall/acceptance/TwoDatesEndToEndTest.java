@@ -33,6 +33,7 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
+    @Ignore
     public void differenceShouldAlwaysBeModulus() {
         twoDates().difference(DATE, DAY_AFTER);
         verify(output).println(1);
