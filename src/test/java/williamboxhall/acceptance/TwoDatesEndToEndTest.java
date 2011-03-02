@@ -17,6 +17,7 @@ import static org.mockito.Mockito.verify;
 public class TwoDatesEndToEndTest {
     private static final String DATE = "01 02 2010";
     private static final String DAY_AFTER = "02 02 2010";
+    private static final String WEEK_AFTER = "08 02 2010";
     @Mock
     private PrintStream output;
 
@@ -30,6 +31,12 @@ public class TwoDatesEndToEndTest {
     public void datesOneDayApartShouldHaveOneDayDifference() {
         twoDates().difference(DATE, DAY_AFTER);
         verify(output).println(1);
+    }
+
+    @Test
+    public void datesMultipleDaysApartShouldHaveMultipleDaysDifference() {
+        twoDates().difference(DATE, WEEK_AFTER);
+        verify(output).println(7);
     }
 
     @Test
