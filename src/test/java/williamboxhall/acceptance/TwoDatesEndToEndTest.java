@@ -18,6 +18,8 @@ public class TwoDatesEndToEndTest {
     private static final String DATE = "01 02 2010";
     private static final String DAY_AFTER = "02 02 2010";
     private static final String WEEK_AFTER = "08 02 2010";
+    private static final String FEBRUARY_27TH = "27 02 2010";
+    private static final String MARCH_2ND = "02 03 2010";
     @Mock
     private PrintStream output;
 
@@ -40,9 +42,9 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
-    public void datesTwoMonthsApartShouldTakeInToAccountMonthLength() {
-        twoDates().difference(DATE, DAY_AFTER);
-        verify(output).println(1);
+    public void differenceBetweenDatesInDifferentMonthsShouldTakeInToAccountMonthLength() {
+        twoDates().difference(FEBRUARY_27TH, MARCH_2ND);
+        verify(output).println(3);
     }
 
     @Test
