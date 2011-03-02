@@ -1,6 +1,6 @@
 package williamboxhall;
 
-class DateParser {
+public class DateParser {
     Date parse(String date) {
         return null;
     }

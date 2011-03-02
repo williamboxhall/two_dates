@@ -20,9 +20,8 @@ public class TwoDatesTest {
     private DateParser dateParser;
 
     @Test
-    @Ignore
     public void createsADateForEachOfTheTwoArgumentsViaParser() {
-        new TwoDates(output).difference(FIRST, SECOND);
+        new TwoDates(output, dateParser).difference(FIRST, SECOND);
         verify(dateParser).parse(FIRST);
         verify(dateParser).parse(SECOND);
     }
