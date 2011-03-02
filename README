@@ -42,7 +42,8 @@ premature optimization. Favouring readability and simplicity.
 4. The requirements state that the output should be in days. I am assuming that a positive integer value for
 difference in days is all that is required. No special formatting around displaying decimals/years/fancy assembled
 strings/edge case formatting (e.g. "No difference") required.
-5. Assuming that no other additional libraries may be used (Google Collections, Apache Commons etc.)
+5. Assuming that no other additional libraries may be used (Google Collections, Apache Commons etc.) OTHER THAN jUnit,
+which is an obvious exception and is required for unit testing
 6. Assuming that an end-to-end acceptance test will suffice as the "test data" deliverable
 
 
