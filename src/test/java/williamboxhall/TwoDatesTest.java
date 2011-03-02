@@ -1,6 +1,5 @@
 package williamboxhall;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -28,6 +27,7 @@ public class TwoDatesTest {
     public void createsADateForEachOfTheTwoArgumentsViaParser() {
         when(dateParser.parse(FIRST)).thenReturn(first);
         new TwoDates(output, dateParser).difference(FIRST, SECOND);
+
         verify(dateParser).parse(FIRST);
         verify(dateParser).parse(SECOND);
     }
@@ -43,8 +43,14 @@ public class TwoDatesTest {
     }
 
     @Test
-    @Ignore
     public void printsTheResult() {
-        
+        int difference = 42;
+        when(dateParser.parse(FIRST)).thenReturn(first);
+        when(dateParser.parse(SECOND)).thenReturn(second);
+        when(first.differenceInDaysFrom(second)).thenReturn(difference);
+
+        new TwoDates(output, dateParser).difference(FIRST, SECOND);
+
+        verify(output).println(difference);
     }
 }
