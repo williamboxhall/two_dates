@@ -1,4 +1,4 @@
 package williamboxhall;
 
-public class Foo {
+class Date {
 }

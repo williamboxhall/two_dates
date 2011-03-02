@@ -25,7 +25,6 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
-    @Ignore
     public void datesOneDayApartShouldHaveOneDayDifference() {
         new TwoDates(output).difference(DATE, DAY_AFTER);
         verify(output).println(1);
@@ -38,5 +37,10 @@ public class TwoDatesEndToEndTest {
         verify(output).println(1);
         new TwoDates(output).difference(DAY_AFTER, DATE);
         verify(output).println(1);
+    }
+
+    @Test
+    @Ignore
+    public void failsWhenTwoArgumentsAreNotProvided() {
     }
 }

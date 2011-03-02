@@ -15,6 +15,5 @@ public class TwoDates {
 
     public void difference(String... arguments) {
         output.println(0);
-        new Foo();
     }
 }
