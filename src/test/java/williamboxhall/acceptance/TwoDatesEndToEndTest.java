@@ -47,6 +47,12 @@ public class TwoDatesEndToEndTest {
     public void failsWhenTwoArgumentsAreNotProvided() {
     }
 
+    @Test
+    @Ignore
+    public void failsWhenIncorrectDateFormat() {
+
+    }
+
     private TwoDates twoDates() {
         return new TwoDates(output, new DateParser(new DateFactory()));
     }
