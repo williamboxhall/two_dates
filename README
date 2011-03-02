@@ -43,9 +43,9 @@ premature optimization. Favouring readability and simplicity.
 4. The requirements state that the output should be in days. I am assuming that a positive integer value for
 difference in days is all that is required. No special formatting around displaying decimals/years/fancy assembled
 strings/edge case formatting (e.g. "No difference") required.
-5. Assuming that no other additional libraries may be used (Google Collections, Apache Commons etc.) OTHER THAN jUnit,
-which is an obvious exception and is required for unit testing, Hamcrest (which comes in with jUnit), and Mockito so
-that I can use proper test doubles in my tests
+5. Assuming that no other additional libraries may be used (Google Collections, Apache Commons etc.) OTHER THAN
+maven to build everything, jUnit for unit testing, Hamcrest (which comes in with jUnit), and Mockito so that I can use
+proper test doubles in my tests
 6. Assuming that an end-to-end acceptance test will suffice as the "test data" deliverable
 
 
@@ -63,7 +63,6 @@ of this calculation, we may need some type of primitive formatting for spitting 
 
 
 INSTRUCTIONS
-    To build the application, run /src/buildDeployAndRun.bat. This will place a file called TwoDates.jar and run a
-    smoke test on it
-    To run the application, run: "java -jar /bin/TwoDates.jar" from the root of the project
+    To build the application, run mvn clean install in the root directory
+    To run the application, run: "java -jar target/two_dates-0.0.1-SNAPSHOT.jar" from the root of the project
     
