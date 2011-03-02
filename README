@@ -5,6 +5,7 @@ Code Test by William Boxhall
     - Constraints
     - Deliverables
 - ASSUMPTIONS
+- DESIGN
 
 
 PROBLEM: Calculate the difference between two dates.
@@ -29,15 +30,34 @@ The Java source files, the test data and any test code.
 
 ASSUMPTIONS
 
-1. Based on the constraint, assuming that I am expected to reimplement my own implementation of Date completely agnostic
-    of java.util.Date. Since the point of the exercise is to implement Date fresh, I will be doing so without much
-    inspection/unfair copying of the code/mechanisms in java.util.Date, and will drive these out from scratch.
-2. Making the assumption that when a user specified date is invalid (doesn't meet the exact correct format, or falls outside
-    of the 1900-2010 range, then a generic error message will suffice (no smarts needed to display clever errors)
-3. Ruling efficiency/performance out of the picture, this takes more time and should involve profiling before premature
-    optimization. Favouring readability and simplicity.
-4. The requirements state that the output should be in days. I am assuming that a positive integer value for difference
-    in days is all that is required. No special formatting around displaying decimals/years/fancy assembled strings/edge
-    case formatting (e.g. "No difference") required.
+1. Based on the constraint, assuming that I am expected to reimplement my own implementation of Date completely
+agnostic of java.util.Date. Since the point of the exercise is to implement Date fresh,
+I will be doing so without much inspection/unfair copying of the code/mechanisms in java.util.Date,
+and will drive these out from scratch.
+2. Making the assumption that when a user specified date is invalid (doesn't meet the exact correct format,
+or falls outside of the 1900-2010 range, then a generic error message will suffice (no smarts needed to display
+clever errors)
+3. Ruling efficiency/performance out of the picture, this takes more time and should involve profiling before
+premature optimization. Favouring readability and simplicity.
+4. The requirements state that the output should be in days. I am assuming that a positive integer value for
+difference in days is all that is required. No special formatting around displaying decimals/years/fancy assembled
+strings/edge case formatting (e.g. "No difference") required.
 5. Assuming that no other additional libraries may be used (Google Collections, Apache Commons etc.)
+6. Assuming that an end-to-end acceptance test will suffice as the "test data" deliverable
+
+
+DESIGN
+
+    A minimal up-front broad-strokes design is appropriate before validating it by driving it out via test.
+    My initial (not well thought out) thinking is that user provide input via commandline arguments, these need to be
+validated, probably via some type of validator or parser rather than pushing the responsibility of validating into the
+Date itself - it doesn't belong there.
+    We then have a Date object which will either store the day/month/year as 3 fields, or 1 field depending on how
+annoying it is to have them separate for calculation purposes. The mechanism for actually finding the difference between
+the two dates may live inside the Data object itself, which is nice from a domain richness point of view, but may not
+belong there if it has other responsibilities - maybe a DateDifferenceCalculator? Finally, depending on what comes out
+of this calculation, we may need some type of primitive formatting for spitting out the final result in to standard out.
+    This is all speculation - we will see what gets driven out.
+
+
     
