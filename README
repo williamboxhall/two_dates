@@ -43,7 +43,8 @@ premature optimization. Favouring readability and simplicity.
 difference in days is all that is required. No special formatting around displaying decimals/years/fancy assembled
 strings/edge case formatting (e.g. "No difference") required.
 5. Assuming that no other additional libraries may be used (Google Collections, Apache Commons etc.) OTHER THAN jUnit,
-which is an obvious exception and is required for unit testing
+which is an obvious exception and is required for unit testing, Hamcrest (which comes in with jUnit), and Mockito so
+that I can use proper test doubles in my tests
 6. Assuming that an end-to-end acceptance test will suffice as the "test data" deliverable
 
 
