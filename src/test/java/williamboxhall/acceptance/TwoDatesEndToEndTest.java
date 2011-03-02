@@ -24,6 +24,7 @@ public class TwoDatesEndToEndTest {
     private static final String FEBRUARY_27TH_2002 = "27 02 2002";
     private static final String JAN_1ST_2001 = "01 01 2001";
     private static final String JAN_1ST_2002 = "01 01 2002";
+    private static final String MARCH_1ST_2002 = "01 03 2002";
     @Mock
     private PrintStream output;
 
@@ -59,8 +60,8 @@ public class TwoDatesEndToEndTest {
 
     @Test
     public void differenceBetweenDatesWithDifferentDaysMonthsAndYearsShouldTakeAllInToConsideration() {
-        //twoDates().difference(JAN_31ST_2001, MARCH_1ST_2002);
-        //verify(output).println(3);
+        twoDates().difference(JAN_1ST_2001, MARCH_1ST_2002);
+        verify(output).println(365 + 31 + 28);
     }
 
     @Test
