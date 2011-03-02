@@ -6,6 +6,7 @@ Code Test by William Boxhall
     - Deliverables
 - ASSUMPTIONS
 - DESIGN
+- INSTRUCTIONS
 
 
 PROBLEM: Calculate the difference between two dates.
@@ -49,7 +50,6 @@ that I can use proper test doubles in my tests
 
 
 DESIGN
-
     A minimal up-front broad-strokes design is appropriate before validating it by driving it out via test.
     My initial (not well thought out) thinking is that user provide input via commandline arguments, these need to be
 validated, probably via some type of validator or parser rather than pushing the responsibility of validating into the
@@ -62,4 +62,8 @@ of this calculation, we may need some type of primitive formatting for spitting 
     This is all speculation - we will see what gets driven out.
 
 
+INSTRUCTIONS
+    To build the application, run /src/buildDeployAndRun.bat. This will place a file called TwoDates.jar and run a
+    smoke test on it
+    To run the application, run: "java -jar /bin/TwoDates.jar" from the root of the project
     
