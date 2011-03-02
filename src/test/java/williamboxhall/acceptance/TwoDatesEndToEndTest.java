@@ -1,6 +1,5 @@
 package williamboxhall.acceptance;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -11,6 +10,7 @@ import williamboxhall.presentation.TwoDates;
 
 import java.io.PrintStream;
 
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,14 +27,18 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
-    @Ignore
     public void datesOneDayApartShouldHaveOneDayDifference() {
         twoDates().difference(DATE, DAY_AFTER);
         verify(output).println(1);
     }
 
     @Test
-    @Ignore
+    public void datesTwoMonthsApartShouldTakeInToAccountMonthLength() {
+        twoDates().difference(DATE, DAY_AFTER);
+        verify(output).println(1);
+    }
+
+    @Test
     public void differenceShouldAlwaysBeModulus() {
         twoDates().difference(DATE, DAY_AFTER);
         verify(output).println(1);
@@ -43,14 +47,23 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
-    @Ignore
     public void failsWhenTwoArgumentsAreNotProvided() {
+        fail("Not yet implemented");
     }
 
     @Test
-    @Ignore
     public void failsWhenIncorrectDateFormat() {
+        fail("Not yet implemented");
+    }
 
+    @Test
+    public void failsWhenYearLessThan1900() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void failsWhenYearGreaterThan2010() {
+        fail("Not yet implemented");
     }
 
     private TwoDates twoDates() {

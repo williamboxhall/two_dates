@@ -13,7 +13,7 @@ public class Date {
     }
 
     public int differenceInDaysFrom(Date second) {
-        return 0;
+        return second.day - this.day;
     }
 
     @Override
