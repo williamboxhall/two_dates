@@ -47,6 +47,9 @@ strings/edge case formatting (e.g. "No difference") required.
 maven to build everything, jUnit for unit testing, Hamcrest (which comes in with jUnit), and Mockito so that I can use
 proper test doubles in my tests
 6. Assuming that an end-to-end acceptance test will suffice as the "test data" deliverable
+7. Assuming that the required date format "DD MM YYYY" implies that a leading zero is required for days/months less
+than 10.
+8. Does not need to be aware of leap years (February 29th is always valid)
 
 
 DESIGN
