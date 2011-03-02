@@ -16,8 +16,8 @@ public class TwoDates {
     }
 
     public void difference(String... arguments) {
-        dateParser.parse(arguments[0]);
-        dateParser.parse(arguments[1]);
-        output.println(0);
+        Date first = dateParser.parse(arguments[0]);
+        Date second = dateParser.parse(arguments[1]);
+        output.println(first.differenceInDaysFrom(second));
     }
 }
