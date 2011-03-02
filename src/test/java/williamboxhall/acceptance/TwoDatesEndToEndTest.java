@@ -5,8 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import williamboxhall.DateParser;
-import williamboxhall.TwoDates;
+import williamboxhall.application.DateParser;
+import williamboxhall.domain.DateFactory;
+import williamboxhall.presentation.TwoDates;
 
 import java.io.PrintStream;
 
@@ -26,6 +27,7 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
+    @Ignore
     public void datesOneDayApartShouldHaveOneDayDifference() {
         twoDates().difference(DATE, DAY_AFTER);
         verify(output).println(1);
@@ -46,6 +48,6 @@ public class TwoDatesEndToEndTest {
     }
 
     private TwoDates twoDates() {
-        return new TwoDates(output, new DateParser());
+        return new TwoDates(output, new DateParser(new DateFactory()));
     }
 }

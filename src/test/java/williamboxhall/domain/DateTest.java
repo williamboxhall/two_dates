@@ -1,4 +1,4 @@
-package williamboxhall;
+package williamboxhall.domain;
 
 import org.junit.Test;
 

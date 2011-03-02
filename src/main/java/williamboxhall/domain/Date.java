@@ -1,6 +1,6 @@
-package williamboxhall;
+package williamboxhall.domain;
 
-class Date {
+public class Date {
     private final int day;
     private final int month;
     private final int year;
@@ -12,7 +12,7 @@ class Date {
         this.year = year;
     }
 
-    int differenceInDaysFrom(Date second) {
+    public int differenceInDaysFrom(Date second) {
         return 0;
     }
 
