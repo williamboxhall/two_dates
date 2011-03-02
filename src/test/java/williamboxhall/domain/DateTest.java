@@ -13,6 +13,8 @@ public class DateTest {
     private static final Date MARCH_2ND = new Date(2, Month.MARCH, 2010);
     private static final Date FEBRUARY_1ST = new Date(1, Month.FEBRUARY, 2010);
     private static final Date MARCH_1ST = new Date(1, Month.MARCH, 2010);
+    private static final Date JAN_1ST_2001 = new Date(1, Month.JANUARY, 2001);
+    private static final Date JAN_1ST_2002 = new Date(1, Month.JANUARY, 2002);
 
     @Test
     public void toStringShouldRenderHyphenatedDate() {
@@ -32,5 +34,10 @@ public class DateTest {
     @Test
     public void differentHonouringMonthLength() {
         assertThat(FEBRUARY_27TH.differenceInDaysFrom(MARCH_2ND), is(3));
+    }
+
+    @Test
+    public void differentAccordingToYear() {
+        assertThat(JAN_1ST_2001.differenceInDaysFrom(JAN_1ST_2002), is(365));
     }
 }

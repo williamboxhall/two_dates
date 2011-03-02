@@ -20,6 +20,10 @@ public class TwoDatesEndToEndTest {
     private static final String WEEK_AFTER = "08 02 2010";
     private static final String FEBRUARY_27TH = "27 02 2010";
     private static final String MARCH_2ND = "02 03 2010";
+    private static final String MARCH_2ND_2001 = "02 03 2001";
+    private static final String FEBRUARY_27TH_2002 = "27 02 2002";
+    private static final String JAN_1ST_2001 = "01 01 2001";
+    private static final String JAN_1ST_2002 = "01 01 2002";
     @Mock
     private PrintStream output;
 
@@ -48,7 +52,19 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
-    public void differenceShouldAlwaysBeModulus() {
+    public void differenceBetweenTwoYearsShouldBe365() {
+        twoDates().difference(JAN_1ST_2001, JAN_1ST_2002);
+        verify(output).println(365);
+    }
+
+    @Test
+    public void differenceBetweenDatesWithDifferentDaysMonthsAndYearsShouldTakeAllInToConsideration() {
+        //twoDates().difference(JAN_31ST_2001, MARCH_1ST_2002);
+        //verify(output).println(3);
+    }
+
+    @Test
+    public void differenceShouldAlwaysBeAbsolute() {
         twoDates().difference(DATE, DAY_AFTER);
         verify(output).println(1);
         twoDates().difference(DAY_AFTER, DATE);

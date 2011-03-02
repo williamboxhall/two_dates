@@ -13,7 +13,7 @@ public class Date {
     }
 
     public int differenceInDaysFrom(Date second) {
-        return month.differenceInDaysFrom(second.month) + second.day - this.day;
+        return month.differenceInDaysFrom(second.month) + (second.day - this.day) + (365 * (second.year - this.year));
     }
 
     @Override
