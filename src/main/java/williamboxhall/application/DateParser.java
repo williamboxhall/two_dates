@@ -21,7 +21,7 @@ public class DateParser {
     }
 
     private String validated(String date) {
-        if (isNull(date) || isNotCorrectlyFormatted(date)) {
+        if (isNull(date) || !isCorrectlyFormatted(date)) {
             throw new IllegalArgumentException(String.format("Expected to be of form '00 00 0000', found '%s'", date));
         }
         return date;
@@ -31,7 +31,7 @@ public class DateParser {
         return object == null;
     }
 
-    private boolean isNotCorrectlyFormatted(String date) {
-        return !CORRECT_FORMAT.matcher(date).matches();
+    private boolean isCorrectlyFormatted(String date) {
+        return CORRECT_FORMAT.matcher(date).matches();
     }
 }

@@ -1,9 +1,11 @@
 package williamboxhall.domain;
 
+@SuppressWarnings("unused")
 public enum Month {
     JANUARY(31),
     FEBRUARY(28),
-    MARCH(31), APRIL(30),
+    MARCH(31),
+    APRIL(30),
     MAY(31),
     JUNE(30),
     JULY(31),
@@ -14,30 +16,34 @@ public enum Month {
     DECEMBER(31);
     private final int length;
 
-    Month(int length) {
+    private Month(int length) {
         this.length = length;
-    }
-
-    public int asNumber() {
-        return ordinal() + 1;
     }
 
     static Month fromNumber(int month) {
         return Month.values()[month-1];
     }
 
+    public int length() {
+        return length;
+    }
+
+    public int asNumber() {
+        return ordinal() + 1;
+    }
+
     int differenceInDaysFrom(Month later) {
         if (later == this) {
             return 0;
-        } else if (earlierThan(later)) {
+        } else if (later.earlierThan(this)) {
             return -later.differenceInDaysFrom(this);
         }
         return daysByTraversalFromEarlierToLater(this, later);
     }
 
-    private int daysByTraversalFromEarlierToLater(Month earlier, Month month) {
+    private static int daysByTraversalFromEarlierToLater(Month earlier, Month later) {
         int days = 0;
-        while (month.earlierThan(earlier)) {
+        while (earlier.earlierThan(later)) {
             days += earlier.length;
             earlier = earlier.next();
         }
@@ -45,14 +51,10 @@ public enum Month {
     }
 
     private boolean earlierThan(Month later) {
-        return later.ordinal() < this.ordinal();
+        return this.ordinal() < later.ordinal();
     }
 
     private Month next() {
         return Month.fromNumber(this.asNumber() + 1);
-    }
-
-    public int length() {
-        return length;
     }
 }
