@@ -12,11 +12,13 @@ import williamboxhall.presentation.TwoDates;
 
 import java.io.PrintStream;
 
+import static java.lang.String.format;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TwoDatesEndToEndTest {
+    private static final DateDifferenceFormatter FORMATTER = new DateDifferenceFormatter();
     private static final String DATE = "01 02 2010";
     private static final String DAY_AFTER = "02 02 2010";
     private static final String WEEK_AFTER = "08 02 2010";
@@ -32,52 +34,53 @@ public class TwoDatesEndToEndTest {
 
     @Test
     public void outputShouldBeCommaSeparatedInputOutputDifference() {
-        twoDates().difference(DATE, DATE);
-        verify(output).println(String.format("%s, %s, %d", DATE, DATE, 0));
+        twoDates().difference(DATE, DAY_AFTER);
+        verify(output).println("01 02 2010, 02 02 2010, 1");
     }
 
     @Test
     public void identicalDatesShouldHaveZeroDaysDifference() {
         twoDates().difference(DATE, DATE);
-        verify(output).println(0);
+        verify(output).println(formatted(DATE, DATE, 0));
     }
 
     @Test
     public void datesOneDayApartShouldHaveOneDayDifference() {
         twoDates().difference(DATE, DAY_AFTER);
-        verify(output).println(1);
+        verify(output).println(formatted(DATE, DAY_AFTER, 1));
     }
 
     @Test
     public void datesMultipleDaysApartShouldHaveMultipleDaysDifference() {
         twoDates().difference(DATE, WEEK_AFTER);
-        verify(output).println(7);
+        verify(output).println(formatted(DATE, WEEK_AFTER, 7));
     }
 
     @Test
     public void differenceBetweenDatesInDifferentMonthsShouldTakeInToAccountMonthLength() {
         twoDates().difference(FEBRUARY_27TH, MARCH_2ND);
-        verify(output).println(3);
+        verify(output).println(formatted(FEBRUARY_27TH, MARCH_2ND, 3));
     }
 
     @Test
     public void differenceBetweenTwoYearsShouldBe365() {
         twoDates().difference(JAN_1ST_2001, JAN_1ST_2002);
-        verify(output).println(365);
+        verify(output).println(formatted(JAN_1ST_2001, JAN_1ST_2002, 365));
     }
 
     @Test
     public void differenceBetweenDatesWithDifferentDaysMonthsAndYearsShouldTakeAllInToConsideration() {
         twoDates().difference(JAN_1ST_2001, MARCH_1ST_2002);
-        verify(output).println(365 + 31 + 28);
+        verify(output).println(formatted(JAN_1ST_2001, MARCH_1ST_2002, 365 + 31 + 28));
     }
 
     @Test
+    @Ignore
     public void differenceShouldAlwaysBeAbsolute() {
         twoDates().difference(DATE, DAY_AFTER);
-        verify(output).println(1);
+        verify(output).println(formatted(DATE, DAY_AFTER, 1));
         twoDates().difference(DAY_AFTER, DATE);
-        verify(output).println(1);
+        verify(output).println(formatted(DAY_AFTER, DATE, 1));
     }
 
     @Test
@@ -105,6 +108,10 @@ public class TwoDatesEndToEndTest {
     }
 
     private TwoDates twoDates() {
-        return new TwoDates(output, new DateParser(new DateFactory()), new DateDifferenceFormatter());
+        return new TwoDates(output, new DateParser(new DateFactory()), FORMATTER);
+    }
+
+    private String formatted(String first, String second, int difference) {
+        return format("%s, %s, %d", first, second, difference);
     }
 }
