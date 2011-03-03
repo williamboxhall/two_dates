@@ -11,8 +11,8 @@ public class TwoDates {
     private final DateParser dateParser;
     private final DateDifferenceFormatter dateDifferenceFormatter;
 
-    public static void main(String... args) {
-        new TwoDates(System.out, new DateParser(new DateFactory()), new DateDifferenceFormatter()).difference(args);
+    public static void main(String... arguments) {
+        new TwoDates(System.out, new DateParser(new DateFactory()), new DateDifferenceFormatter()).difference(arguments);
     }
 
     public TwoDates(PrintStream out, DateParser dateParser, DateDifferenceFormatter dateDifferenceFormatter) {
