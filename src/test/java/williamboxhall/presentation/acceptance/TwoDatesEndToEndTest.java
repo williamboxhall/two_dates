@@ -19,6 +19,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class TwoDatesEndToEndTest {
     private static final DateDifferenceFormatter FORMATTER = new DateDifferenceFormatter();
+    private static final DateDifferenceDataGenerator GENERATOR = new DateDifferenceDataGenerator();
     private static final String DATE = "01 02 2010";
     private static final String DAY_AFTER = "02 02 2010";
     private static final String WEEK_AFTER = "08 02 2010";
@@ -80,6 +81,29 @@ public class TwoDatesEndToEndTest {
         verify(output).println(formatted(DATE, DAY_AFTER, 1));
         twoDates().difference(DAY_AFTER, DATE);
         verify(output).println(formatted(DAY_AFTER, DATE, 1));
+    }
+
+    @Test
+    public void differenceShouldBeCorrectFor100RandomlyGeneratedDates() {
+        for (int i = 0; i < 100; i++) {
+            String expectedOutput = GENERATOR.generate();
+            String first = firstDateFrom(expectedOutput);
+            String second = secondDateFrom(expectedOutput);
+            twoDates().difference(first, second);
+            verify(output).println(expectedOutput);
+        }
+    }
+
+    private String firstDateFrom(String expectedOutput) {
+        return dateAtIndexFrom(0, expectedOutput);
+    }
+
+    private String secondDateFrom(String expectedOutput) {
+        return dateAtIndexFrom(1, expectedOutput);
+    }
+
+    private String dateAtIndexFrom(int index, String expectedOutput) {
+        return expectedOutput.split(",")[index].trim();
     }
 
     @Test
