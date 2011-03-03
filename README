@@ -67,5 +67,6 @@ of this calculation, we may need some type of primitive formatting for spitting 
 
 INSTRUCTIONS
     To build the application, run all tests, and install jar, run "mvn clean install" in the root directory
-    To run the application, run "java -jar target/two_dates-0.0.1-SNAPSHOT.jar" from the root of the project
+    To run the application, run "java -jar target/two_dates-0.0.1-SNAPSHOT.jar 'DD MM YYYY, DD MM YYYY'" from the root
+    of the project
     
