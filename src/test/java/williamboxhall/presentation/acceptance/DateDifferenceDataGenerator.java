@@ -20,20 +20,6 @@ public class DateDifferenceDataGenerator {
         return new DateFactory().createWith(randomDay(), randomMonth(), randomNonLeapYear());
     }
 
-    private int difference(Date first, Date second) {
-        long firstInMillisSince1900 = millisSince1900(first);
-        long secondInMillisSince1900 = millisSince1900(second);
-        double difference = firstInMillisSince1900 - secondInMillisSince1900;
-        double differenceInDays = round(difference / (24 * 60 * 60 * 1000));
-        return Math.abs(Double.valueOf(differenceInDays).intValue());
-    }
-
-    private long millisSince1900(Date date) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(date.getYear(), date.getMonth().asNumber() - 1, date.getDay());
-        return calendar.getTimeInMillis();
-    }
-
     private int randomDay() {
         return randomBetweenInclusive(1, 28);
     }
@@ -48,6 +34,20 @@ public class DateDifferenceDataGenerator {
 
     private int randomBetweenInclusive(int min, int max) {
         return min + (int) (Math.random() * ((max - min) + 1));
+    }
+
+    private int difference(Date first, Date second) {
+        long firstInMillisSince1900 = millisSince1900(first);
+        long secondInMillisSince1900 = millisSince1900(second);
+        double difference = firstInMillisSince1900 - secondInMillisSince1900;
+        double differenceInDays = round(difference / (24 * 60 * 60 * 1000));
+        return Math.abs(Double.valueOf(differenceInDays).intValue());
+    }
+
+    private long millisSince1900(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(date.getYear(), date.getMonth().asNumber() - 1, date.getDay());
+        return calendar.getTimeInMillis();
     }
 
     private String format(Date first, Date second, int difference) {

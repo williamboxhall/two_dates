@@ -63,7 +63,7 @@ public class DateFactoryTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void failsWhenDayLargerThanAppropriateGivenMonthOne() {
+    public void failsWhenDayLargerThanAppropriateGivenMonth() {
         new DateFactory().createWith(31, 2, 2010).toString();
     }
 

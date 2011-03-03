@@ -17,16 +17,16 @@ public class ArgumentParser {
         return arguments[0];
     }
 
-    private boolean hasOneComma(String argument) {
-        return argument.split(",").length == 2;
+    private boolean isNull(String[] strings) {
+        return strings == null;
     }
 
     private boolean isSingleton(String[] arguments) {
         return arguments.length == 1;
     }
 
-    private boolean isNull(String[] strings) {
-        return strings == null;
+    private boolean hasOneComma(String argument) {
+        return argument.split(",").length == 2;
     }
 
     private String[] split(String argument) {

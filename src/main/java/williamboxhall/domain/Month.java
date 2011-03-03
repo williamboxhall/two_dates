@@ -20,16 +20,16 @@ public enum Month {
         this.length = length;
     }
 
-    static Month fromNumber(int month) {
-        return Month.values()[month-1];
-    }
-
     public int length() {
         return length;
     }
 
     public int asNumber() {
         return ordinal() + 1;
+    }
+
+    static Month fromNumber(int month) {
+        return Month.values()[month-1];
     }
 
     int differenceInDaysFrom(Month later) {

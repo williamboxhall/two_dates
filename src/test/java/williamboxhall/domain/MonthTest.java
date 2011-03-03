@@ -2,7 +2,6 @@ package williamboxhall.domain;
 
 import org.junit.Test;
 
-import static java.lang.Math.abs;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -24,8 +23,7 @@ public class MonthTest {
 
     @Test
     public void differenceShouldBeTakenFromFirstOfEarlierToFirstOfLaterMonth() {
-        assertThat(abs(Month.DECEMBER.differenceInDaysFrom(Month.NOVEMBER)), is(Month.NOVEMBER.length()));
-        assertThat(abs(Month.DECEMBER.differenceInDaysFrom(Month.NOVEMBER)), is(Month.NOVEMBER.length()));
+        assertThat(Month.NOVEMBER.differenceInDaysFrom(Month.DECEMBER), is(Month.NOVEMBER.length()));
     }
 
     @Test

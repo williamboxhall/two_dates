@@ -1,7 +1,5 @@
 package williamboxhall.presentation.acceptance;
 
-
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -32,7 +30,7 @@ public class TwoDatesEndToEndTest {
     private static final String MARCH_2ND = "02 03 2010";
     private static final String JAN_1ST_2001 = "01 01 2001";
     private static final String JAN_1ST_2002 = "01 01 2002";
-    private static final String MARCH_1ST_2002 = "01 03 2002";
+    private static final String MARCH_2ND_2002 = "02 03 2002";
     @Mock
     private PrintStream output;
 
@@ -74,8 +72,8 @@ public class TwoDatesEndToEndTest {
 
     @Test
     public void differenceBetweenDatesWithDifferentDaysMonthsAndYearsShouldTakeAllInToConsideration() {
-        twoDates().difference(inputFormatted(JAN_1ST_2001, MARCH_1ST_2002));
-        verify(output).println(outputFormatted(JAN_1ST_2001, MARCH_1ST_2002, 365 + 31 + 28));
+        twoDates().difference(inputFormatted(JAN_1ST_2001, MARCH_2ND_2002));
+        verify(output).println(outputFormatted(JAN_1ST_2001, MARCH_2ND_2002, 365 + 31 + 28 + 1));
     }
 
     @Test

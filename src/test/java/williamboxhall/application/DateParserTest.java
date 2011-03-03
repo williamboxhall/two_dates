@@ -30,6 +30,7 @@ public class DateParserTest {
     private static final String SHORT_YEAR = "00 00 000";
     private static final String LONG_YEAR = "00 00 00000";
     @DataPoints
+    @SuppressWarnings("unused")
     public static final String[] INVALID_ACCORDING_TO_FORMAT_DATES = {NULL, EMPTY, WHITESPACE, NON_SPACE_DELIMITED,
             TWO_NUMBERS, FOUR_NUMBERS, NON_NUMERIC, SHORT_DAY, LONG_DAY, SHORT_MONTH, LONG_MONTH, SHORT_YEAR, LONG_YEAR};
 
@@ -45,7 +46,7 @@ public class DateParserTest {
     @Theory
     public void failsWhenDateStringIsInvalidAccordingToRequiredFormat(String invalid) {
         try {
-            new DateParser(null).parse(invalid);
+            new DateParser(mock(DateFactory.class)).parse(invalid);
             fail(String.format("'%s' should have failed to parse", invalid));
         } catch (IllegalArgumentException e) {
             // expected. It's a shame you can't use @Test(expected = IllegalArgumentException.class) in
