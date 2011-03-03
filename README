@@ -59,7 +59,7 @@ validated, probably via some type of validator or parser rather than pushing the
 Date itself - it doesn't belong there.
     We then have a Date object which will either store the day/month/year as 3 fields, or 1 field depending on how
 annoying it is to have them separate for calculation purposes. The mechanism for actually finding the difference between
-the two dates may live inside the Data object itself, which is nice from a domain richness point of view, but may not
+the two dates may live inside the Date object itself, which is nice from a domain richness point of view, but may not
 belong there if it has other responsibilities - maybe a DateDifferenceCalculator? Finally, depending on what comes out
 of this calculation, we may need some type of primitive formatting for spitting out the final result in to standard out.
     This is all speculation - we will see what gets driven out.
