@@ -2,6 +2,7 @@ package williamboxhall.presentation.acceptance;
 
 import williamboxhall.domain.Date;
 import williamboxhall.domain.DateFactory;
+import williamboxhall.presentation.DateDifferenceFormatter;
 
 import java.util.Calendar;
 
@@ -12,7 +13,7 @@ public class DateDifferenceDataGenerator {
         Date first = randomDate();
         Date second = randomDate();
         int difference = difference(first, second);
-        return String.format("%s, %s, %s", first.toString(), second.toString(), difference);
+        return format(first, second, difference);
     }
 
     private Date randomDate() {
@@ -47,6 +48,10 @@ public class DateDifferenceDataGenerator {
 
     private int randomBetweenInclusive(int min, int max) {
         return min + (int) (Math.random() * ((max - min) + 1));
+    }
+
+    private String format(Date first, Date second, int difference) {
+        return new DateDifferenceFormatter().format(first, second, difference);
     }
 }
 
