@@ -17,9 +17,19 @@ public class DateFactoryTest {
         new DateFactory().createWith(1, 2, 1800);
     }
 
+    @Test
+    public void passesWhenStartOfYear1900() {
+        assertThat(new DateFactory().createWith(1, 1, 1900).toString(), is("01 01 1900"));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void failsWhenYearMoreThanThan2010() {
         new DateFactory().createWith(1, 2, 2200);
+    }
+
+    @Test
+    public void passesWhenEndOfYear2010() {
+        assertThat(new DateFactory().createWith(31, 12, 2010).toString(), is("31 12 2010"));
     }
 
     @Test
@@ -28,7 +38,7 @@ public class DateFactoryTest {
             new DateFactory().createWith(1, 2, 1800);
             fail("Expected an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Expected year to be in range 1900-2010, found '1800'"));
+            assertThat(e.getMessage(), is("Expected year to fall within range 1900-2010, found '1800'"));
         }
     }
 }

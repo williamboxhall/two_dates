@@ -112,7 +112,7 @@ public class TwoDatesEndToEndTest {
             twoDates().difference("01 02 2003, 01 02 1000");
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Expected year to fall within range 1900-2010"));
+            assertThat(e.getMessage(), is("Expected year to fall within range 1900-2010, found '1000'"));
         }
     }
 
