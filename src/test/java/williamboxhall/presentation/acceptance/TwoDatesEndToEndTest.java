@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import williamboxhall.application.DateParser;
 import williamboxhall.domain.DateFactory;
+import williamboxhall.presentation.ArgumentParser;
 import williamboxhall.presentation.DateDifferenceFormatter;
 import williamboxhall.presentation.TwoDates;
 
@@ -138,7 +139,7 @@ public class TwoDatesEndToEndTest {
     }
 
     private TwoDates twoDates(PrintStream printStream) {
-        return new TwoDates(printStream, new DateParser(new DateFactory()), FORMATTER);
+        return new TwoDates(printStream, new ArgumentParser(), new DateParser(new DateFactory()), FORMATTER);
     }
 
     private String inputFormatted(String first, String second) {

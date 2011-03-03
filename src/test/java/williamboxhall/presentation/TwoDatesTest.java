@@ -14,8 +14,10 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TwoDatesTest {
-    private static final String FIRST = "foo";
-    private static final String SECOND = "bar";
+    private static final String COMBINED_ARGS = "foo";
+    private static final String FIRST = "bar";
+    private static final String SECOND = "baz";
+    private static final String[] DATE_ARGUMENTS = {FIRST, SECOND};
     @Mock
     private PrintStream output;
     @Mock
@@ -26,11 +28,22 @@ public class TwoDatesTest {
     private Date second;
     @Mock
     private DateDifferenceFormatter dateDifferenceFormatter;
+    @Mock
+    private ArgumentParser argumentParser;
+
+    @Test
+    public void interpretsTheSingleArgumentInToTwoSeparateDateArgumentsViaArgumentParser() {
+        when(argumentParser.parse(COMBINED_ARGS)).thenReturn(DATE_ARGUMENTS);
+        when(dateParser.parse(FIRST)).thenReturn(first);
+        new TwoDates(output, argumentParser, dateParser, dateDifferenceFormatter).difference(COMBINED_ARGS);
+        verify(argumentParser).parse(COMBINED_ARGS);
+    }
 
     @Test
     public void createsADateForEachOfTheTwoArgumentsViaParser() {
+        when(argumentParser.parse(COMBINED_ARGS)).thenReturn(DATE_ARGUMENTS);
         when(dateParser.parse(FIRST)).thenReturn(first);
-        new TwoDates(output, dateParser, dateDifferenceFormatter).difference(FIRST, SECOND);
+        new TwoDates(output, argumentParser, dateParser, dateDifferenceFormatter).difference(COMBINED_ARGS);
 
         verify(dateParser).parse(FIRST);
         verify(dateParser).parse(SECOND);
@@ -38,10 +51,11 @@ public class TwoDatesTest {
 
     @Test
     public void comparesTheTwoDates() {
+        when(argumentParser.parse(COMBINED_ARGS)).thenReturn(DATE_ARGUMENTS);
         when(dateParser.parse(FIRST)).thenReturn(first);
         when(dateParser.parse(SECOND)).thenReturn(second);
 
-        new TwoDates(output, dateParser, dateDifferenceFormatter).difference(FIRST, SECOND);
+        new TwoDates(output, argumentParser, dateParser, dateDifferenceFormatter).difference(COMBINED_ARGS);
 
         verify(first).differenceInDaysFrom(second);
     }
@@ -50,12 +64,13 @@ public class TwoDatesTest {
     public void printsTheResultViaFormatter() {
         int difference = 42;
         String result = "foo";
+        when(argumentParser.parse(COMBINED_ARGS)).thenReturn(DATE_ARGUMENTS);
         when(dateParser.parse(FIRST)).thenReturn(first);
         when(dateParser.parse(SECOND)).thenReturn(second);
         when(first.differenceInDaysFrom(second)).thenReturn(difference);
         when(dateDifferenceFormatter.format(first, second, difference)).thenReturn(result);
 
-        new TwoDates(output, dateParser, dateDifferenceFormatter).difference(FIRST, SECOND);
+        new TwoDates(output, argumentParser, dateParser, dateDifferenceFormatter).difference(COMBINED_ARGS);
 
         verify(output).println(result);
     }
