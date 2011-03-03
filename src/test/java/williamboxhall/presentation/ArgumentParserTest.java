@@ -38,7 +38,7 @@ public class ArgumentParserTest {
             new ArgumentParser().parse(null);
             fail("Expected an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Invalid arguments, expected single argument containing two comma-separated values, found 'null'"));
+            assertThat(e.getMessage(), is("Expected single argument containing two comma-separated values, found 'null'"));
         }
     }
 

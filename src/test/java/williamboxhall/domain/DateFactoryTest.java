@@ -32,13 +32,43 @@ public class DateFactoryTest {
         assertThat(new DateFactory().createWith(31, 12, 2010).toString(), is("31 12 2010"));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void failsWhenMonthLessThanOne() {
+        new DateFactory().createWith(1, 0, 2010).toString();
+    }
+
     @Test
-    public void failureExceptionMessageIsGeneric() {
+    public void passesWhenMonthIsOne() {
+        assertThat(new DateFactory().createWith(31, 1, 2010).toString(), is("31 01 2010"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void failsWhenMonthMoreThanThirteen() {
+        new DateFactory().createWith(1, 0, 2010).toString();
+    }
+
+    @Test
+    public void passesWhenMonthIsTwelve() {
+        assertThat(new DateFactory().createWith(31, 12, 2010).toString(), is("31 12 2010"));
+    }
+
+    @Test
+    public void yearFailureExceptionMessageIsGeneric() {
         try {
             new DateFactory().createWith(1, 2, 1800);
             fail("Expected an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Expected year to fall within range 1900-2010, found '1800'"));
+        }
+    }
+
+     @Test
+    public void monthFailureExceptionMessageIsGeneric() {
+        try {
+            new DateFactory().createWith(1, 0, 2010);
+            fail("Expected an IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Expected month to fall within range 1-12, found '0'"));
         }
     }
 }

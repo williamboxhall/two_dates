@@ -1,5 +1,7 @@
 package williamboxhall.presentation.acceptance;
 
+
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -28,8 +30,6 @@ public class TwoDatesEndToEndTest {
     private static final String WEEK_AFTER = "08 02 2010";
     private static final String FEBRUARY_27TH = "27 02 2010";
     private static final String MARCH_2ND = "02 03 2010";
-    private static final String MARCH_2ND_2001 = "02 03 2001";
-    private static final String FEBRUARY_27TH_2002 = "27 02 2002";
     private static final String JAN_1ST_2001 = "01 01 2001";
     private static final String JAN_1ST_2002 = "01 01 2002";
     private static final String MARCH_1ST_2002 = "01 03 2002";
@@ -113,6 +113,16 @@ public class TwoDatesEndToEndTest {
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Expected year to fall within range 1900-2010, found '1000'"));
+        }
+    }
+
+    @Test
+    public void failsWhenMonthNotValidMonth() {
+        try {
+            twoDates().difference("01 02 2003, 01 13 1000");
+            fail("Expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Expected month to fall within range 1-12, found '13'"));
         }
     }
 
