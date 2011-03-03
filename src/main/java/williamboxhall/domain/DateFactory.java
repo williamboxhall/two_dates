@@ -1,10 +1,12 @@
 package williamboxhall.domain;
 
 import static java.lang.String.format;
+import static williamboxhall.domain.Month.fromNumber;
 
 public class DateFactory {
-    public Date createWith(int day, int month, int year) {
-        return new Date(day, Month.fromNumber(validatedMonth(month)), validatedYear(year));
+    public Date createWith(int day, int numbericalMonth, int year) {
+        Month month = fromNumber(validatedMonth(numbericalMonth));
+        return new Date(validatedDayInMonth(day, month), month, validatedYear(year));
     }
 
     private int validatedMonth(int month) {
@@ -12,6 +14,14 @@ public class DateFactory {
             throw new IllegalArgumentException(format("Expected month to fall within range 1-12, found '%s'", month));
         }
         return month;
+    }
+
+    private int validatedDayInMonth(int day, Month month) {
+         if (day < 1 || day > month.length()) {
+             throw new IllegalArgumentException(format("Expected day to fall within the range specified by month %s " +
+                     "(1-%d), found '%d'", month, month.length(), day));
+         }
+        return day;
     }
 
     private int validatedYear(int year) {

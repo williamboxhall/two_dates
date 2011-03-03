@@ -127,6 +127,17 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
+    public void failsWhenDayNotValidAccordingToMonth() {
+        try {
+            twoDates().difference("01 02 2003, 31 02 1000");
+            fail("Expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Expected day to fall within the range specified by month FEBRUARY (1-28), " +
+                    "found '31'"));
+        }
+    }
+
+    @Test
     public void differenceShouldBeCorrectFor1000RandomlyGeneratedDates() {
         for (int i = 0; i < 1000; i++) {
             String expectedOutput = GENERATOR.generate();
