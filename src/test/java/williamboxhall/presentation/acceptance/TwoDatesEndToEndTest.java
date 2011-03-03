@@ -1,6 +1,5 @@
 package williamboxhall.presentation.acceptance;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,6 +13,8 @@ import williamboxhall.presentation.TwoDates;
 import java.io.PrintStream;
 
 import static java.lang.String.format;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -86,6 +87,37 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
+    public void failsWhenTwoArgumentsAreNotProvided() {
+        try {
+            twoDates().difference("foo");
+            fail("Expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Invalid arguments, expected single argument containing two comma-separated" +
+                    " values, found 'foo'"));
+        }
+    }
+
+    @Test
+    public void failsWhenIncorrectDateFormat() {
+        try {
+            twoDates().difference("foo, bar");
+            fail("Expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Invalid argument, expected to be of form '00 00 0000', found 'foo'"));
+        }
+    }
+
+    @Test
+    public void failsWhenYearLessThan1900() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void failsWhenYearGreaterThan2010() {
+        fail("Not yet implemented");
+    }
+
+    @Test
     public void differenceShouldBeCorrectFor1000RandomlyGeneratedDates() {
         for (int i = 0; i < 1000; i++) {
             String expectedOutput = GENERATOR.generate();
@@ -108,30 +140,6 @@ public class TwoDatesEndToEndTest {
 
     private String dateAtIndexFrom(int index, String expectedOutput) {
         return expectedOutput.split(",")[index].trim();
-    }
-
-    @Test
-    @Ignore
-    public void failsWhenTwoArgumentsAreNotProvided() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    @Ignore
-    public void failsWhenIncorrectDateFormat() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    @Ignore
-    public void failsWhenYearLessThan1900() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    @Ignore
-    public void failsWhenYearGreaterThan2010() {
-        fail("Not yet implemented");
     }
 
     private TwoDates twoDates() {
