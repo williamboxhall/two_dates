@@ -75,7 +75,6 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
-    @Ignore
     public void differenceShouldAlwaysBeAbsolute() {
         twoDates().difference(DATE, DAY_AFTER);
         verify(output).println(formatted(DATE, DAY_AFTER, 1));

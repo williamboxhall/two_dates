@@ -1,5 +1,7 @@
 package williamboxhall.domain;
 
+import static java.lang.Math.abs;
+
 public class Date {
     private final int day;
     private final Month month;
@@ -12,7 +14,19 @@ public class Date {
     }
 
     public int differenceInDaysFrom(Date second) {
-        return month.differenceInDaysFrom(second.month) + (second.day - this.day) + (365 * (second.year - this.year));
+        return abs(dayDifference(second) + monthDifference(second) + yearDifference(second));
+    }
+
+    private int dayDifference(Date second) {
+        return (second.day - this.day);
+    }
+
+    private int monthDifference(Date second) {
+        return month.differenceInDaysFrom(second.month);
+    }
+
+    private int yearDifference(Date second) {
+        return (365 * (second.year - this.year));
     }
 
     @Override

@@ -8,7 +8,7 @@ import static williamboxhall.domain.Month.FEBRUARY;
 
 public class DateTest {
     private static final Date TODAY = new Date(1, FEBRUARY, 2003);
-    private static final Date TOMORROW = new Date(3, FEBRUARY, 2003);
+    private static final Date TOMORROW = new Date(2, FEBRUARY, 2003);
     private static final Date FEB_27TH_2010 = new Date(27, FEBRUARY, 2010);
     private static final Date MARCH_2ND = new Date(2, Month.MARCH, 2010);
     private static final Date FEBRUARY_1ST = new Date(1, Month.FEBRUARY, 2010);
@@ -20,7 +20,7 @@ public class DateTest {
 
     @Test
     public void differentAccordingToDay() {
-        assertThat(TODAY.differenceInDaysFrom(TOMORROW), is(2));
+        assertThat(TODAY.differenceInDaysFrom(TOMORROW), is(1));
     }
 
     @Test
@@ -51,5 +51,11 @@ public class DateTest {
     @Test
     public void toStringShouldLeftPadMonthsOfOneDigitWithLeadingZero() {
         assertThat(FEB_27TH_2010.toString(), is("27 02 2010"));
+    }
+
+    @Test
+    public void differenceIsAbsolute() {
+         assertThat(TODAY.differenceInDaysFrom(TOMORROW), is(1));
+         assertThat(TOMORROW.differenceInDaysFrom(TODAY), is(1));
     }
 }
