@@ -25,6 +25,6 @@ public class DateFactoryTest {
 
     @Test
     public void createsADateWithDayMonthAndYear() {
-        assertThat(new DateFactory().createWith(1, 2, 2003).toString(), is("1-2-2003"));
+        assertThat(new DateFactory().createWith(1, 2, 2003).toString(), is("01 02 2003"));
     }
 }

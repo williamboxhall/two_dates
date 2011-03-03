@@ -1,4 +1,4 @@
-package williamboxhall.acceptance;
+package williamboxhall.presentation.acceptance;
 
 import williamboxhall.domain.Date;
 import williamboxhall.domain.DateFactory;
@@ -7,14 +7,7 @@ import java.util.Calendar;
 
 import static java.lang.Math.round;
 
-public class TestDataGenerator {
-    public static void main(String... arguments) {
-        for (int i = 0; i < 10000; i++) {
-            String output = new TestDataGenerator().generate();
-            System.out.println(output);
-        }
-    }
-
+public class DateDifferenceDataGenerator {
     public String generate() {
         Date first = randomDate();
         Date second = randomDate();

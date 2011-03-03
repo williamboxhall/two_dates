@@ -17,7 +17,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return String.format("%d %d %d", day, month.asNumber(), year);
+        return String.format("%s %s %d", leftPad(day), leftPad(month.asNumber()), year);
     }
 
     public int getDay() {
@@ -30,5 +30,9 @@ public class Date {
 
     public int getYear() {
         return year;
+    }
+
+    private String leftPad(int value) {
+        return String.format((value < 10) ? "0%d" : "%d", value);
     }
 }
