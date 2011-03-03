@@ -53,4 +53,13 @@ public class DateParserTest {
         }
     }
 
+    @Test
+    public void failureExceptionMessageIsGeneric() {
+        try {
+            new DateParser(null).parse(null);
+            fail("Expected an IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Invalid argument, expected to be of form '00 00 0000', found 'null'"));
+        }
+    }
 }
