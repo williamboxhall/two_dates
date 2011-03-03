@@ -30,6 +30,12 @@ public class TwoDatesEndToEndTest {
     private PrintStream output;
 
     @Test
+    public void outputShouldBeCommaSeparatedInputOutputDifference() {
+        twoDates().difference(DATE, DATE);
+        verify(output).println(String.format("%s, %s, %d", DATE, DATE, 0));
+    }
+
+    @Test
     public void identicalDatesShouldHaveZeroDaysDifference() {
         twoDates().difference(DATE, DATE);
         verify(output).println(0);
