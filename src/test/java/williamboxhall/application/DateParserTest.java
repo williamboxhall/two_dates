@@ -43,7 +43,7 @@ public class DateParserTest {
     }
 
     @Theory
-    public void failsWithIllegalArgumentExceptionWhenDateStringIsInvalidAccordingToRequiredFormat(String invalid) {
+    public void failsWhenDateStringIsInvalidAccordingToRequiredFormat(String invalid) {
         try {
             new DateParser(null).parse(invalid);
             fail(String.format("'%s' should have failed to parse", invalid));
@@ -59,7 +59,7 @@ public class DateParserTest {
             new DateParser(null).parse(null);
             fail("Expected an IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Invalid argument, expected to be of form '00 00 0000', found 'null'"));
+            assertThat(e.getMessage(), is("Expected to be of form '00 00 0000', found 'null'"));
         }
     }
 }

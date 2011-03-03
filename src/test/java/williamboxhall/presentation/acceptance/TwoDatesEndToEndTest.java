@@ -92,8 +92,7 @@ public class TwoDatesEndToEndTest {
             twoDates().difference("foo");
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Invalid arguments, expected single argument containing two comma-separated" +
-                    " values, found 'foo'"));
+            assertThat(e.getMessage(), is("Expected single argument containing two comma-separated values, found 'foo'"));
         }
     }
 
@@ -103,18 +102,18 @@ public class TwoDatesEndToEndTest {
             twoDates().difference("foo, bar");
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Invalid argument, expected to be of form '00 00 0000', found 'foo'"));
+            assertThat(e.getMessage(), is("Expected to be of form '00 00 0000', found 'foo'"));
         }
     }
 
     @Test
-    public void failsWhenYearLessThan1900() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void failsWhenYearGreaterThan2010() {
-        fail("Not yet implemented");
+    public void failsWhenYearNotWithinConstraintRange() {
+        try {
+            twoDates().difference("01 02 2003, 01 02 1000");
+            fail("Expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Expected year to fall within range 1900-2010"));
+        }
     }
 
     @Test

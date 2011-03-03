@@ -22,8 +22,7 @@ public class DateParser {
 
     private String validated(String date) {
         if (isNull(date) || isNotCorrectlyFormatted(date)) {
-            throw new IllegalArgumentException(String.format("Invalid argument, expected to be of form '00 00 0000', " +
-                    "found '%s'", date));
+            throw new IllegalArgumentException(String.format("Expected to be of form '00 00 0000', found '%s'", date));
         }
         return date;
     }

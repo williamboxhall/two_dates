@@ -12,7 +12,7 @@ public class ArgumentParser {
 
     private String validated(String[] arguments) {
         if (isNull(arguments) || !isSingleton(arguments) || !hasOneComma(arguments[0])) {
-            throw new IllegalArgumentException(format("Invalid arguments, expected single argument containing two comma-separated values, found '%s'", arguments));
+            throw new IllegalArgumentException(format("Expected single argument containing two comma-separated values, found '%s'", arguments));
         }
         return arguments[0];
     }
