@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import williamboxhall.application.DateParser;
 import williamboxhall.domain.Date;
-import williamboxhall.presentation.TwoDates;
 
 import java.io.PrintStream;
 
@@ -25,11 +24,13 @@ public class TwoDatesTest {
     private Date first;
     @Mock
     private Date second;
+    @Mock
+    private DateDifferenceFormatter dateDifferenceFormatter;
 
     @Test
     public void createsADateForEachOfTheTwoArgumentsViaParser() {
         when(dateParser.parse(FIRST)).thenReturn(first);
-        new TwoDates(output, dateParser).difference(FIRST, SECOND);
+        new TwoDates(output, dateParser, dateDifferenceFormatter).difference(FIRST, SECOND);
 
         verify(dateParser).parse(FIRST);
         verify(dateParser).parse(SECOND);
@@ -40,20 +41,22 @@ public class TwoDatesTest {
         when(dateParser.parse(FIRST)).thenReturn(first);
         when(dateParser.parse(SECOND)).thenReturn(second);
 
-        new TwoDates(output, dateParser).difference(FIRST, SECOND);
+        new TwoDates(output, dateParser, dateDifferenceFormatter).difference(FIRST, SECOND);
 
         verify(first).differenceInDaysFrom(second);
     }
 
     @Test
-    public void printsTheResult() {
+    public void printsTheResultViaFormatter() {
         int difference = 42;
+        String result = "foo";
         when(dateParser.parse(FIRST)).thenReturn(first);
         when(dateParser.parse(SECOND)).thenReturn(second);
         when(first.differenceInDaysFrom(second)).thenReturn(difference);
+        when(dateDifferenceFormatter.format(first, second, difference)).thenReturn(result);
 
-        new TwoDates(output, dateParser).difference(FIRST, SECOND);
+        new TwoDates(output, dateParser, dateDifferenceFormatter).difference(FIRST, SECOND);
 
-        verify(output).println(difference);
+        verify(output).println(result);
     }
 }
