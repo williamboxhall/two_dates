@@ -30,7 +30,7 @@ public class DateDifferenceDataGenerator {
 
     private long millisSince1900(Date date) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(date.getYear(), date.getMonth().asNumber(), date.getDay());
+        calendar.set(date.getYear(), date.getMonth().asNumber() - 1, date.getDay());
         return calendar.getTimeInMillis();
     }
 

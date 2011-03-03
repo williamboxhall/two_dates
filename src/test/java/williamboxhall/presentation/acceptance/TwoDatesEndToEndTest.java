@@ -14,6 +14,7 @@ import java.io.PrintStream;
 
 import static java.lang.String.format;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -84,12 +85,14 @@ public class TwoDatesEndToEndTest {
     }
 
     @Test
-    public void differenceShouldBeCorrectFor100RandomlyGeneratedDates() {
-        for (int i = 0; i < 100; i++) {
+    public void differenceShouldBeCorrectFor1000RandomlyGeneratedDates() {
+        for (int i = 0; i < 1000; i++) {
             String expectedOutput = GENERATOR.generate();
             String first = firstDateFrom(expectedOutput);
             String second = secondDateFrom(expectedOutput);
-            twoDates().difference(first, second);
+
+            PrintStream output = mock(PrintStream.class);
+            twoDates(output).difference(first, second);
             verify(output).println(expectedOutput);
         }
     }
@@ -131,7 +134,11 @@ public class TwoDatesEndToEndTest {
     }
 
     private TwoDates twoDates() {
-        return new TwoDates(output, new DateParser(new DateFactory()), FORMATTER);
+        return twoDates(output);
+    }
+
+    private TwoDates twoDates(PrintStream printStream) {
+        return new TwoDates(printStream, new DateParser(new DateFactory()), FORMATTER);
     }
 
     private String formatted(String first, String second, int difference) {
